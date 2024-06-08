@@ -60,9 +60,9 @@ class Mod implements IPreAkiLoadMod, IPostDBLoadModAsync
         // Update achievements if needed
         const currentTime = Math.floor(Date.now() / 1000);
         const fetchAchievements = currentTime > Mod.config.nextUpdate;
-    
+           
         if (await Mod.updateAchievements(fetchAchievements)) {
-            Mod.updateTimer = setInterval(() => Mod.updateAchievements(), 21600000);
+            Mod.updateTimer = setInterval(() => Mod.updateAchievements(), Mod.config.updateIntervalInHours * 3600000);
         }
     }
 
@@ -99,7 +99,7 @@ class Mod implements IPreAkiLoadMod, IPostDBLoadModAsync
                 const achievements = data.achievements;
 
                 await fs.promises.writeFile(Mod.achievementDataPath, JSON.stringify(achievements));
-                Mod.config.nextUpdate = Math.floor(Date.now() / 1000) + 21600;
+                Mod.config.nextUpdate = Math.floor(Date.now() / 1000) + (Mod.config.updateIntervalInHours * 3600);
                 await fs.promises.writeFile(Mod.configPath, JSON.stringify(Mod.config, null, 4));
             } catch (error) {
                 logger.error(error.message);
@@ -116,6 +116,7 @@ class Mod implements IPreAkiLoadMod, IPostDBLoadModAsync
 interface Config 
 {
     nextUpdate: number,
+    updateIntervalInHours: number
 }
 
 module.exports = { mod: new Mod() }

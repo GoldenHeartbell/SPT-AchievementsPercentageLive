@@ -1,9 +1,6 @@
 
 ## Achievements Perecentage Live
-This mod adds the percentage to the achievements menu that shows how many achievements you have completed out of the total number of achievements available.
-
-The data is updated from the live version of the game.
-The mod will automatically update the percentage every 6 hours upon starting the server.
+This mod displays the percentage of players who have completed a achievement in the game per achievement. The mod will automatically update the percentage once the server starts and then every 6 hours upon starting the server.
 
 ![Screenshot of achievements](/documentation/image.png)
 

@@ -18,3 +18,6 @@
 /package-lock.json
 /tsconfig.json
 /types
+/documentation
+/readme.md
+/icon.png

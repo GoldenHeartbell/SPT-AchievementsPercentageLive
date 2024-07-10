@@ -1,13 +1,13 @@
 import type { DependencyContainer } from "tsyringe";
 
-import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import type { IPostDBLoadModAsync } from "@spt-aki/models/external/IPostDBLoadModAsync";
-import type { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
-import type {StaticRouterModService} from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
+import type { ILogger } from"@spt/models/spt/utils/ILogger";
+import type { IPostDBLoadModAsync } from "@spt/models/external/IPostDBLoadModAsync";
+import type { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
+import type {StaticRouterModService} from "@spt/services/mod/staticRouter/StaticRouterModService";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-class Mod implements IPreAkiLoadMod, IPostDBLoadModAsync
+class Mod implements IPreSptLoadMod, IPostDBLoadModAsync
 {
     private static container: DependencyContainer;
     private static updateTimer: NodeJS.Timeout;
@@ -15,7 +15,7 @@ class Mod implements IPreAkiLoadMod, IPostDBLoadModAsync
     private static configPath = path.resolve(__dirname, "../config/config.json");
     private static achievementDataPath = path.resolve(__dirname, "../config/achievement.json");
 
-    public preAkiLoad(container: DependencyContainer): void {
+    public preSptLoad(container: DependencyContainer): void {
         const staticRouterModService = container.resolve<StaticRouterModService>("StaticRouterModService");
 
         // Hook up to existing SPT static route
